@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PawCast Weather Landing Page</title>
+    <style>
+      /* Basic styling for centering and layout */
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        /* background-color: #f4f4f9; */
+        background-color: #000000;
+      }
+
+      .container {
+        border: 1px solid #35188f;
+        border-radius: 10px;
+        padding: 20px;
+        width: 100%;
+        max-width: 1000px;
+        background-color: #000000;
+        position: relative;
+        text-align: center;
+        box-sizing: border-box;
+        /* overflow: hidden; */
+        border: 2px solid purple; /* Initial border color */
+        box-shadow: 0 0 15px purple; /* Glowing effect */
+        border-radius: 10px; /* Optional: rounded corners for a softer look */
+      }
+
+      .main-button {
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px 25px;
+        /* background-color: #35188f; */
+        background-color: #0b0220;
+        background-color: ;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #800080;
+      }
+      .main-button::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        width: calc(100% + 20px);
+        height: calc(100% + 20px);
+        border: 1px solid #800080;
+        box-sizing: border-box;
+        animation: ring 2s infinite;
+      }
+      @keyframes ring {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1.5);
+          opacity: 0;
+        }
+      }
+
+      .weather-icon {
+        margin-right: 10px;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        margin-top: 15px;
+        /* background-color: #0b0220; */
+        background-color: #0b0220;
+      }
+      header img {
+        height: 50px;
+      }
+      header .nav-buttons {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      header .nav-buttons button {
+        margin-left: 10px;
+        padding: 10px 20px;
+        /* background-color: #fff; */
+        /* color: #000000; */
+        /* border: none; */
+        cursor: pointer;
+        margin-top: 10px;
+        border-radius: 20px;
+      }
+
+      .header-button1 {
+        background-color: #fff;
+      }
+
+      .header-button2 {
+        background-color: #0b0220;
+        border: 1px solid #fff;
+        color: #fff;
+      }
+
+      h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        /* color: #333; */
+        color: #ffff;
+      }
+
+      .flip-box-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+      .flip-box {
+        width: 225px;
+        height: 250px;
+        border: 1px solid #ddd;
+        perspective: 1000px;
+      }
+      .flip-box-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+      }
+      .flip-box:hover .flip-box-inner {
+        transform: rotateY(180deg);
+      }
+      .flip-box-front,
+      .flip-box-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+      }
+      .flip-box-front {
+        background-color: #bddf9d;
+        color: black;
+      }
+      .flip-box-back {
+        background-color: #ffebee;
+        color: black;
+        transform: rotateY(180deg);
+      }
+      .cute-dogs {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* .flip-box-bzck-all {
+        background-color: #000;
+      } */
+
+      #flip-box1 {
+        background-color: #bddf9d;
+      }
+
+      #flip-box2 {
+        background-color: #ffa4de;
+      }
+
+      #flip-box3 {
+        background-color: #9da7fe;
+      }
+
+      #flip-box4 {
+        background-color: #f0b86e;
+      }
+
+      footer {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #ffff;
+      }
+
+      @media (max-width: 1260px) {
+        .flip-box-container {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media (max-width: 960px) {
+        .flip-box-container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 660px) {
+        .flip-box-container {
+          grid-template-columns: 1fr;
+        }
+        header {
+          flex-direction: column;
+        }
+        header .nav-buttons button {
+          margin: 5px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Main button to load the weather app -->
+      <button class="main-button" onclick="togglePage()">
+        <span class="weather-icon">🌤</span>Load Weather App
+      </button>
+      <!-- Header section with logo and external links -->
+      <header>
+        <img src="images/pawcast-logo.png" alt="PawCast Weather Logo" />
+        <!-- Replace with your logo URL -->
+        <div class="nav-buttons">
+          <button
+            class="header-button1"
+            onclick="window.location.href='https://example.com'"
+          >
+            External Site 1
+          </button>
+          <button
+            class="header-button2"
+            onclick="window.location.href='https://example2.com'"
+          >
+            External Site 2
+          </button>
+        </div>
+      </header>
+      <!-- Heading summarizing the purpose of the site -->
+      <h2>Pet-Friendly Weather Updates at a Glance</h2>
+      <!-- Section for flip boxes -->
+      <div class="flip-box-container">
+        <!-- Flip box 1 -->
+        <div class="flip-box">
+          <div class="flip-box-inner">
+            <div class="flip-box-front" id="flip-box1">
+              <img
+                src="images/chow-chow.png"
+                alt="Dog Image"
+                class="cute-dogs"
+              />
+            </div>
+            <div class="flip-box-back flip-box-bzck-all">
+              <img
+                src="dog1-small.jpg"
+                alt="Small Dog Image"
+                style="width: 50%; height: 50%"
+              />
+              <p>
+                <a href="https://example3.com" target="_blank">More Info</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Flip box 2 -->
+        <div class="flip-box">
+          <div class="flip-box-inner">
+            <div class="flip-box-front" id="flip-box2">
+              <img
+                src="images/french-bulldog.png"
+                alt="Dog Image"
+                class="cute-dogs"
+              />
+            </div>
+            <div class="flip-box-back">
+              <img
+                src="dog2-small.jpg"
+                alt="Small Dog Image"
+                style="width: 50%; height: 50%"
+              />
+              <p>
+                <a href="https://example4.com" target="_blank">More Info</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Flip box 3 -->
+        <div class="flip-box">
+          <div class="flip-box-inner">
+            <div class="flip-box-front" id="flip-box3">
+              <img
+                src="images/chow-chow.png"
+                alt="Dog Image"
+                class="cute-dogs"
+              />
+            </div>
+            <div class="flip-box-back">
+              <img
+                src="dog3-small.jpg"
+                alt="Small Dog Image"
+                style="width: 50%; height: 50%"
+              />
+              <p>
+                <a href="https://example5.com" target="_blank">More Info</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Flip box 4 -->
+        <div class="flip-box">
+          <div class="flip-box-inner">
+            <div class="flip-box-front" id="flip-box4">
+              <img
+                src="images/french-bulldog.png"
+                alt="Dog Image"
+                class="cute-dogs"
+              />
+            </div>
+            <div class="flip-box-back">
+              <img
+                src="#"
+                alt="Small Dog Image"
+                style="width: 50%; height: 50%"
+              />
+              <p>
+                <a href="https://example6.com" target="_blank">More Info</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer with developer's name -->
+      <footer>
+        Cooded by <a href="">Patricia Kennedy,</a>is
+        <a href="">open-sourced on Github</a>and
+        <a href="">hosted on netlify.</a>
+      </footer>
+    </div>
+    <script>
+      function togglePage() {
+        const currentURL = window.location.href;
+        const weatherAppURL = 'weather-app.html';
+        const landingPageURL = 'landing-page.html'; // Change this to the actual URL or path of the landing page
+
+        if (currentURL.includes('weather-app.html')) {
+          window.location.href = landingPageURL;
+        } else {
+          window.location.href = weatherAppURL;
+        }
+      }
+    </script>
+  </body>
+</html>
