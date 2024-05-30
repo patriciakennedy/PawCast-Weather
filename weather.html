@@ -3,9 +3,69 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/weather.css" />
+    <title>PawCast Weather</title>
   </head>
   <body>
-    <h1>Senior Software Developer at Welfrgo Bank</h1>
+    <div class="container">
+      <!-- Main button to load the weather app -->
+      <button class="main-button" onclick="togglePage()">
+        <span class="weather-icon">🌤</span>Load Weather App
+      </button>
+      <!-- Header section with logo and external links -->
+      <header>
+        <img src="images/pawcast-logo.png" alt="PawCast Weather Logo" />
+        <!-- Replace with your logo URL -->
+        <div class="nav-buttons">
+          <button
+            class="header-button1"
+            onclick="window.location.href='https://example.com'"
+          >
+            External Site 1
+          </button>
+          <button
+            class="header-button2"
+            onclick="window.location.href='https://example2.com'"
+          >
+            External Site 2
+          </button>
+        </div>
+      </header>
+      <!-- Heading summarizing the purpose of the site -->
+
+      <!-- -------------------- Search form ------------------------ -->
+      <div class="search-form">
+        <form>
+          <input type="search" placeholder="Enter a City.." required />
+          <input type="submit" value="Search" />
+        </form>
+      </div>
+      <main>
+        <div class="weather-app">
+          <div>
+            <h1>Paris</h1>
+            <p>
+              Tuesday 14:49, scattered clouds <br />
+              Humidity: 66%, Wind: 3.13km/h
+            </p>
+          </div>
+          <div>🌤12C</div>
+        </div>
+      </main>
+
+      <!-- Footer with developer's name -->
+      <footer>
+        Cooded by <a href="">Patricia Kennedy,</a>is
+        <a href="">open-sourced on Github</a>and
+        <a href="">hosted on netlify.</a>
+      </footer>
+    </div>
+    <script src="js/main.js"></script>
   </body>
 </html>
