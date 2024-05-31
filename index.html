@@ -3,39 +3,61 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
     <title>PawCast Weather</title>
   </head>
   <body>
     <div class="container">
       <!-- Main button to load the weather app -->
       <button class="main-button" onclick="togglePage()">
-        <span class="weather-icon">🌤</span>Load Weather App
+        <span class="weather-icon">🌤</span>Check Weather Below
       </button>
-      <!-- Header section with logo and external links -->
-      <header>
-        <img src="images/pawcast-logo.png" alt="PawCast Weather Logo" />
-        <!-- Replace with your logo URL -->
-        <div class="nav-buttons">
-          <button
-            class="header-button1"
-            onclick="window.location.href='https://example.com'"
-          >
-            External Site 1
-          </button>
-          <button
-            class="header-button2"
-            onclick="window.location.href='https://example2.com'"
-          >
-            External Site 2
-          </button>
-        </div>
-      </header>
-      <!-- Heading summarizing the purpose of the site -->
+
       <h2>Pet-Friendly Weather Updates at a Glance</h2>
+
+      <!-- ------------------------- weather app form section ---------------  -->
+
+      <div class="city-name">
+        <!-- ID ADDED FOR TARGETTING -->
+        <form id="city-form">
+          <input
+            type="search"
+            placeholder="Enter a city.."
+            class="search-placeholder"
+            required
+            id="city-input"
+          />
+          <input type="submit" value="Search" class="btn-search" />
+        </form>
+      </div>
+
+      <!-- ------------------------- weather app ---------------  -->
+
+      <div class="current-weather">
+        <div>
+          <h1 id="city-name">Paris</h1>
+          <!-- ID ADDED FOR TARGETTING -->
+          <p class="weather-details">
+            <span id="current-date"></span>, moderate rain <br />
+            Humidity: <strong>87%</strong>, Wind: <strong>7.2km/h</strong>
+          </p>
+        </div>
+        <div class="current-temp">
+          <span class="temp-icon">☀️</span>
+          <span class="temp-now">24</span>
+          <span class="temp-unit">°C</span>
+        </div>
+      </div>
+
+      <!-- ------------------------ weather app end ---------------------  -->
+
       <!-- Section for flip boxes -->
       <div class="flip-box-container">
         <!-- Flip box 1 -->
@@ -45,17 +67,22 @@
               <img
                 src="images/chow-chow.png"
                 alt="Dog Image"
-                class="cute-dogs"
+                class="cute-dogs dogs-back"
               />
             </div>
-            <div class="flip-box-back flip-box-bzck-all">
+            <div class="flip-box-back flip-box-bzkc-all">
               <img
-                src="#"
+                src="images/chow-chow.png"
                 alt="Small Dog Image"
                 style="width: 50%; height: 50%"
               />
+              <h4>21 fun things to do with your dog</h4>
               <p>
-                <a href="https://example3.com" target="_blank">More Info</a>
+                <a
+                  href="https://www.care.com/c/101-things-to-do-with-your-dog/"
+                  target="_blank"
+                  >More Info</a
+                >
               </p>
             </div>
           </div>
@@ -65,19 +92,25 @@
           <div class="flip-box-inner">
             <div class="flip-box-front" id="flip-box2">
               <img
-                src="images/french-bulldog.png"
+                src="images/australian-cattledog.png"
                 alt="Dog Image"
                 class="cute-dogs"
               />
             </div>
             <div class="flip-box-back">
               <img
-                src="#"
+                src="images/australian-cattledog.png"
                 alt="Small Dog Image"
                 style="width: 50%; height: 50%"
               />
+              <h4>How to keep dogs cool in summer</h4>
+
               <p>
-                <a href="https://example4.com" target="_blank">More Info</a>
+                <a
+                  href="https://www.medivetgroup.com/pet-care/pet-advice/10-tips-to-care-for-your-dog-in-the-heat/"
+                  target="_blank"
+                  >More Info</a
+                >
               </p>
             </div>
           </div>
@@ -87,19 +120,24 @@
           <div class="flip-box-inner">
             <div class="flip-box-front" id="flip-box3">
               <img
-                src="images/chow-chow.png"
+                src="images/Japanese Chin.png"
                 alt="Dog Image"
                 class="cute-dogs"
               />
             </div>
             <div class="flip-box-back">
               <img
-                src="#"
+                src="images/Japanese Chin.png"
                 alt="Small Dog Image"
                 style="width: 50%; height: 50%"
               />
+              <h4>How to keep dogs hot in summer</h4>
               <p>
-                <a href="https://example5.com" target="_blank">More Info</a>
+                <a
+                  href="https://www.petmd.com/dog/general-health/how-to-keep-dogs-warm-in-winter"
+                  target="_blank"
+                  >More Info</a
+                >
               </p>
             </div>
           </div>
@@ -116,12 +154,15 @@
             </div>
             <div class="flip-box-back">
               <img
-                src="#"
+                src="images/french-bulldog.png"
                 alt="Small Dog Image"
                 style="width: 50%; height: 50%"
               />
+              <h4>Pet Health Information</h4>
               <p>
-                <a href="https://example6.com" target="_blank">More Info</a>
+                <a href="https://www.vetstreet.com/" target="_blank"
+                  >More Info</a
+                >
               </p>
             </div>
           </div>
@@ -129,7 +170,7 @@
       </div>
       <!-- Footer with developer's name -->
       <footer>
-        Cooded by <a href="">Patricia Kennedy,</a>is
+        Coded by <a href="">Patricia Kennedy,</a>is
         <a href="">open-sourced on Github</a>and
         <a href="">hosted on netlify.</a>
       </footer>

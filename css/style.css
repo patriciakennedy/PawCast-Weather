@@ -7,8 +7,7 @@ html {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
- font-family: "Roboto", sans-serif;
-  /* background-color: #f4f4f9; */
+  font-family: 'Roboto', sans-serif;
   background-color: #000000;
 }
 
@@ -17,19 +16,17 @@ html {
 /*******************************************/
 
 .container {
-  border: 1px solid #35188f;
   border-radius: 10px;
   padding: 20px;
   width: 100%;
   max-width: 1000px;
-  background-color: #000000;
+  background-color: #040404;
   position: relative;
   text-align: center;
   box-sizing: border-box;
-  /* overflow: hidden; */
-  border: 2px solid purple; /* Initial border color */
-  box-shadow: 0 0 15px purple; /* Glowing effect */
-  border-radius: 10px; /* Optional: rounded corners for a softer look */
+  border: 2px solid purple;
+  box-shadow: 0 0 15px purple;
+  border-radius: 10px;
 }
 
 .main-button {
@@ -73,48 +70,10 @@ html {
   margin-right: 10px;
 }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  margin-top: 15px;
-  /* background-color: #0b0220; */
-  background-color: #0b0220;
-}
-header img {
-  height: 50px;
-}
-header .nav-buttons {
-  display: flex;
-  flex-wrap: wrap;
-}
-header .nav-buttons button {
-  margin-left: 10px;
-  padding: 10px 20px;
-  /* background-color: #fff; */
-  /* color: #000000; */
-  /* border: none; */
-  cursor: pointer;
-  margin-top: 10px;
-  border-radius: 20px;
-}
-
-.header-button1 {
-  background-color: #fff;
-}
-
-.header-button2 {
-  background-color: #0b0220;
-  border: 1px solid #fff;
-  color: #fff;
-}
-
 h2 {
   margin-bottom: 20px;
+  margin-top: 50px;
   font-size: 24px;
-  /* color: #333; */
   color: #ffff;
 }
 
@@ -124,6 +83,82 @@ h2 {
   object-fit: cover;
 }
 
+/* ------------------------- weather app-------------------------------------- */
+h1 {
+  font-size: 25px;
+  margin-top: 30px;
+  margin-left: 70px;
+  color: #fff;
+}
+
+.search-placeholder {
+  background-color: #f9f7fe;
+  border: none;
+  color: rgba(39, 33, 66, 0.4);
+  font-size: 16px;
+  padding: 20px;
+  width: 75%;
+  border-radius: 6px;
+}
+
+.btn-search {
+  background-color: #800080;
+  color: #fff;
+  margin-left: 5px;
+  font-size: 16px;
+  padding: 20px;
+  border: none;
+  border-radius: 5px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.weather-details {
+  /* color: rgba(39, 33, 66, 0.4); */
+  color: #ffebee;
+  margin-left: 70px;
+  padding-bottom: 5px;
+}
+
+.current-weather {
+  display: flex;
+  /* align-items: center; */
+  text-align: left;
+}
+
+.current-temp {
+  display: flex;
+  align-items: center;
+  right: 0;
+}
+
+.temp-icon {
+  position: relative;
+  top: 3px;
+  font-size: 22px;
+  left: 490px;
+}
+
+.temp-now {
+  position: relative;
+  font-family: 'Playfair Display', serif;
+  font-size: 65px;
+  font-weight: bold;
+  left: 485px;
+  top: -5px;
+  color: #fff;
+}
+
+.temp-unit {
+  position: relative;
+  font-size: 20px;
+  position: relative;
+  top: -5px;
+  left: 480px;
+  color: #ffff;
+}
+
+/* ------------------------- weather app END --------------------------------- */
 /*Flip boxes*/
 .flip-box-container {
   display: grid;
@@ -187,6 +222,12 @@ h2 {
 
 #flip-box4 {
   background-color: #f0b86e;
+}
+
+h4 {
+  font-size: 16px;
+  padding: 10px;
+  margin-top: -20px;
 }
 
 /*Footer*/
