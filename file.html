@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- <link rel="stylesheet" href="css/style.css" /> -->
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <title>PawCast Weather</title>
+    <style>
+      /* Basic styling for centering and layout */
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        font-family: 'Roboto', sans-serif;
+        background-color: #000000;
+        color: #fff;
+      }
+
+      /******************************************
+/* LAYOUT
+/*******************************************/
+
+      .container {
+        border-radius: 10px;
+        padding: 20px;
+        width: 100%;
+        max-width: 1000px;
+        background-color: #000000;
+        position: relative;
+        text-align: center;
+        box-sizing: border-box;
+        border: 2px solid purple;
+        box-shadow: 0 0 15px purple;
+        border-radius: 10px;
+      }
+
+      .main-button {
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px 25px;
+        background-color: #0b0220;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #800080;
+      }
+      .main-button::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        width: calc(100% + 20px);
+        height: calc(100% + 20px);
+        border: 1px solid #800080;
+        box-sizing: border-box;
+        animation: ring 2s infinite;
+      }
+      @keyframes ring {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(1.5);
+          opacity: 0;
+        }
+      }
+
+      .weather-icon {
+        margin-right: 10px;
+      }
+
+      h2 {
+        margin-bottom: 20px;
+        margin-top: 50px;
+        font-size: 24px;
+        color: #ffff;
+      }
+
+      .cute-dogs {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* ------------------------- weather app-------------------------------------- */
+      h1 {
+        font-size: 25px;
+        margin-top: 30px;
+        margin-left: 70px;
+        color: #fff;
+      }
+
+      .search-placeholder {
+        background-color: #f9f7fe;
+        border: none;
+        color: rgba(39, 33, 66, 0.4);
+        font-size: 16px;
+        padding: 20px;
+        width: 75%;
+        border-radius: 6px;
+      }
+
+      .btn-search {
+        background-color: #800080;
+        color: #fff;
+        margin-left: 5px;
+        font-size: 16px;
+        padding: 20px;
+        border: none;
+        border-radius: 5px;
+        line-height: 1;
+        cursor: pointer;
+      }
+
+      .weather-details {
+        /* color: rgba(39, 33, 66, 0.4); */
+        color: #ffebee;
+        margin-left: 70px;
+        padding-bottom: 5px;
+      }
+
+      .current-weather {
+        display: flex;
+        /* align-items: center; */
+        text-align: left;
+      }
+
+      .current-temp {
+        display: flex;
+        align-items: center;
+        right: 0;
+      }
+
+      .temp-icon {
+        position: relative;
+        top: 3px;
+        font-size: 22px;
+        left: 490px;
+      }
+
+      .temp-now {
+        position: relative;
+        font-family: 'Playfair Display', serif;
+        font-size: 65px;
+        font-weight: bold;
+        left: 485px;
+        top: -5px;
+        color: #fff;
+      }
+
+      .temp-unit {
+        position: relative;
+        font-size: 20px;
+        position: relative;
+        top: -5px;
+        left: 480px;
+        color: #ffff;
+      }
+
+      /* ------------------------- weather app END --------------------------------- */
+      /*Flip boxes*/
+      .flip-box-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      .flip-box {
+        width: 225px;
+        height: 250px;
+        border: 1px solid #ddd;
+        perspective: 1000px;
+      }
+
+      .flip-box-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+      }
+
+      .flip-box:hover .flip-box-inner {
+        transform: rotateY(180deg);
+      }
+
+      .flip-box-front,
+      .flip-box-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+      }
+
+      .flip-box-front {
+        background-color: #bddf9d;
+        color: black;
+        /* border-radius: 10px; */
+      }
+
+      .flip-box-back {
+        background-color: #ffebee;
+        color: black;
+        transform: rotateY(180deg);
+        /* border-radius: 10px; */
+      }
+
+      #flip-box1 {
+        background-color: #bddf9d;
+      }
+
+      #flip-box2 {
+        background-color: #ffa4de;
+      }
+
+      #flip-box3 {
+        background-color: #9da7fe;
+      }
+
+      #flip-box4 {
+        background-color: #f0b86e;
+      }
+
+      h4 {
+        font-size: 16px;
+        padding: 10px;
+        margin-top: -20px;
+      }
+
+      /*Footer*/
+      footer {
+        margin-top: 20px;
+        font-size: 12px;
+        
+      }
+
+     .edit-footer a {
+font-size: 30px;
+     }
+
+      /******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
+
+      @media (max-width: 1260px) {
+        .flip-box-container {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media (max-width: 960px) {
+        .flip-box-container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 660px) {
+        .flip-box-container {
+          grid-template-columns: 1fr;
+        }
+        header {
+          flex-direction: column;
+        }
+        header .nav-buttons button {
+          margin: 5px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Main button to load the weather app -->
+      <button class="main-button" onclick="togglePage()">
+        <span class="weather-icon">🌤</span>Check Weather Below
+      </button>
+
+      <h2>Pet-Friendly Weather Updates at a Glance</h2>
+
+      <!-- ------------------------- weather app form section ---------------  -->
+
+      <div class="city-name">
+        <!-- ID ADDED FOR TARGETTING -->
+        <form id="city-form">
+          <input
+            type="search"
+            placeholder="Enter a city.."
+            class="search-placeholder"
+            required
+            id="city-input"
+          />
+          <input type="submit" value="Search" class="btn-search" />
+        </form>
+      </div>
+
+      <!-- ------------------------- weather app ---------------  -->
+
+      <div class="current-weather">
+        <div>
+          <h1 id="city-name">Paris</h1>
+          <!-- ID ADDED FOR TARGETTING -->
+          <p class="weather-details">
+            <span id="current-date"></span>, moderate rain <br />
+            Humidity: <strong>87%</strong>, Wind: <strong>7.2km/h</strong>
+          </p>
+        </div>
+        <div class="current-temp">
+          <span class="temp-icon">☀️</span>
+          <span class="temp-now">24</span>
+          <span class="temp-unit">°C</span>
+        </div>
+      </div>
+
+      <!-- ------------------------ weather app end ---------------------  -->
+
+      <!-- Section for flip boxes -->
+      <div class="flip-box-container">
+        <!-- Flip box 1 -->
+        <div class="flip-box">
+          <div class="flip-box-inner">
+            <div class="flip-box-front" id="flip-box1">
+              <img
+                src="images/chow-chow.png"
+                alt="Dog Image"
+                class="cute-dogs dogs-back"
+              />
+            </div>
+            <div class="flip-box-back flip-box-bzkc-all">
+              <img
+                src="images/chow-chow.png"
+                alt="Small Dog Image"
+                style="width: 50%; height: 50%"
+              />
+              <h4>21 fun things to do with your dog</h4>
+              <p>
+                <a
+                  href="https://www.care.com/c/101-things-to-do-with-your-dog/"
+                  target="_blank"
+                  >More Info</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Flip box 2 -->
+        <div class="flip-box">
+          <div class="flip-box-inner">
+            <div class="flip-box-front" id="flip-box2">
+              <img
+                src="images/australian-cattledog.png"
+                alt="Dog Image"
+                class="cute-dogs"
+              />
+            </div>
+            <div class="flip-box-back">
+              <img
+                src="images/australian-cattledog.png"
+                alt="Small Dog Image"
+                style="width: 50%; height: 50%"
+              />
+              <h4>How to keep dogs cool in summer</h4>
+
+              <p>
+                <a
+                  href="https://www.medivetgroup.com/pet-care/pet-advice/10-tips-to-care-for-your-dog-in-the-heat/"
+                  target="_blank"
+                  >More Info</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Flip box 3 -->
+        <div class="flip-box">
+          <div class="flip-box-inner">
+            <div class="flip-box-front" id="flip-box3">
+              <img
+                src="images/Japanese Chin.png"
+                alt="Dog Image"
+                class="cute-dogs"
+              />
+            </div>
+            <div class="flip-box-back">
+              <img
+                src="images/Japanese Chin.png"
+                alt="Small Dog Image"
+                style="width: 50%; height: 50%"
+              />
+              <h4>How to keep dogs hot in summer</h4>
+              <p>
+                <a
+                  href="https://www.petmd.com/dog/general-health/how-to-keep-dogs-warm-in-winter"
+                  target="_blank"
+                  >More Info</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Flip box 4 -->
+        <div class="flip-box">
+          <div class="flip-box-inner">
+            <div class="flip-box-front" id="flip-box4">
+              <img
+                src="images/french-bulldog.png"
+                alt="Dog Image"
+                class="cute-dogs"
+              />
+            </div>
+            <div class="flip-box-back">
+              <img
+                src="images/french-bulldog.png"
+                alt="Small Dog Image"
+                style="width: 50%; height: 50%"
+              />
+              <h4>Pet Health Information</h4>
+              <p>
+                <a href="https://www.vetstreet.com/" target="_blank"
+                  >More Info</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer with developer's name -->
+      <footer class="edit-footer">
+        <p>
+          coded by
+          <a href="https://github.com/patriciakennedy" target="_blank"
+            >Patricia Kennedy</a
+          >
+          is
+          <a
+            href="https://github.com/patriciakennedy/PawCast-Weather"
+            target="_blank"
+            >open-sourced on GitHub</a
+          >
+          and
+          <a
+            href="https://app.netlify.com/sites/pawcast-weather-app/overview"
+            target="_blank"
+            >hosted on Netlify</a
+          >
+        </p>
+      </footer>
+    </div>
+    <!-- <script src="js/main.js"></script> -->
+    <script>
+      function togglePage() {
+        const currentURL = window.location.href;
+        const weatherAppURL = 'weather.html';
+        const landingPageURL = 'index.html'; // Change this to the actual URL or path of the landing page
+
+        if (currentURL.includes('weather.html')) {
+          window.location.href = landingPageURL;
+        } else {
+          window.location.href = weatherAppURL;
+        }
+      }
+
+      /////////////////////////////////// weather Scripts
+      //Function to handle the form submission
+      function handleFormSubmission(event) {
+        event.preventDefault(); //Prevent the default form submission
+
+        // Capture the user input
+        let city = document.getElementById('city-input').value;
+        // console.log(city);
+
+        // Construct the API URL
+        let apiKey = 'b69a33291f51af70f905t53b1o4a330b';
+        let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+        // console.log(apiUrl);
+
+        // STEP#4: Make the API request
+        axios
+          .get(apiUrl)
+          .then(function (response) {
+            // console.log(response.data);
+
+            // STEP#5: Extract the necessary data from the API response
+            let cityName = response.data.city;
+            let currentTemp = Math.round(response.data.temperature.current);
+
+            // Update the DOM with the extracted data
+            document.getElementById('city-name').innerText = cityName;
+            document.querySelector('.temp-now').innerText = currentTemp;
+          })
+          .catch(function (error) {
+            // Log any errors to the console
+            console.log(error);
+          });
+      }
+
+      // Adding the event listener to the form
+      document
+        .getElementById('city-form')
+        .addEventListener('submit', handleFormSubmission);
+
+      let currentDate = document.querySelector('#current-date');
+      let currentTime = new Date();
+      let minutes = currentTime.getMinutes();
+      let hours = currentTime.getHours();
+      let day = currentTime.getDay();
+
+      let days = [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednedsy',
+        'Thursday',
+        'Friday',
+        'Saturday',
+      ];
+
+      let formattedDay = days[day];
+
+      currentDate.innerHTML = `${formattedDay} ${minutes}:${hours}`;
+    </script>
+  </body>
+</html>

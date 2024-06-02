@@ -9,6 +9,7 @@ html {
   min-height: 100vh;
   font-family: 'Roboto', sans-serif;
   background-color: #000000;
+  color: #fff;
 }
 
 /******************************************
@@ -20,7 +21,7 @@ html {
   padding: 20px;
   width: 100%;
   max-width: 1000px;
-  background-color: #040404;
+  background-color: #000000;
   position: relative;
   text-align: center;
   box-sizing: border-box;
@@ -35,7 +36,6 @@ html {
   left: 50%;
   transform: translateX(-50%);
   padding: 10px 25px;
-  /* background-color: #35188f; */
   background-color: #0b0220;
   color: #fff;
   border: none;
@@ -173,7 +173,7 @@ h1 {
   height: 250px;
   border: 1px solid #ddd;
   perspective: 1000px;
-  }
+}
 
 .flip-box-inner {
   position: relative;
@@ -207,7 +207,7 @@ h1 {
   background-color: #ffebee;
   color: black;
   transform: rotateY(180deg);
-    /* border-radius: 10px; */
+  /* border-radius: 10px; */
 }
 
 #flip-box1 {
@@ -236,7 +236,10 @@ h4 {
 footer {
   margin-top: 20px;
   font-size: 12px;
-  color: #ffff;
+}
+
+footer a:link {
+  color: #1e90ff; /* Unvisited link color */
 }
 
 /******************************************
@@ -254,6 +257,7 @@ footer {
   }
 }
 @media (max-width: 660px) {
+
   .flip-box-container {
     grid-template-columns: 1fr;
   }
@@ -263,4 +267,5 @@ footer {
   header .nav-buttons button {
     margin: 5px 0;
   }
+  
 }
