@@ -173,7 +173,7 @@ h1 {
   height: 250px;
   border: 1px solid #ddd;
   perspective: 1000px;
-}
+  }
 
 .flip-box-inner {
   position: relative;
@@ -200,12 +200,14 @@ h1 {
 .flip-box-front {
   background-color: #bddf9d;
   color: black;
+  /* border-radius: 10px; */
 }
 
 .flip-box-back {
   background-color: #ffebee;
   color: black;
   transform: rotateY(180deg);
+    /* border-radius: 10px; */
 }
 
 #flip-box1 {
@@ -233,7 +235,7 @@ h4 {
 /*Footer*/
 footer {
   margin-top: 20px;
-  font-size: 14px;
+  font-size: 12px;
   color: #ffff;
 }
 
