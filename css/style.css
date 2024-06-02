@@ -257,15 +257,71 @@ footer a:link {
   }
 }
 @media (max-width: 660px) {
+  /* .flip-box-container {
+    grid-template-columns: fr;
+  } */
 
-  .flip-box-container {
-    grid-template-columns: 1fr;
-  }
   header {
     flex-direction: column;
   }
+
   header .nav-buttons button {
     margin: 5px 0;
   }
-  
+  .container {
+    margin-top: 40px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 10px;
+  }
+  h2 {
+    font-size: 16px;
+    margin-bottom: 20px;
+    margin-top: 40px;
+  }
+  .main-button {
+    font-size: 12px;
+  }
+  .search-placeholder {
+    font-size: 14px;
+    padding: 15px;
+    width: 75%;
+    border-radius: 6px;
+  }
+
+  .btn-search {
+    margin-left: 5px;
+    font-size: 14px;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 22px;
+    margin-top: 30px;
+    margin-left: 12px;
+  }
+
+  .weather-details {
+    margin-left: 12px;
+    padding-bottom: 5px;
+    font-size: 12px;
+  }
+
+  .temp-icon {
+    top: 3px;
+    font-size: 18px;
+    left: 105px;
+  }
+
+  .temp-now {
+    font-size: 50px;
+    left: 100px;
+    top: -5px;
+  }
+
+  .temp-unit {
+    font-size: 20px;
+    top: -5px;
+    left: 108px;
+  }
 }
