@@ -234,12 +234,16 @@ h4 {
 
 /*Footer*/
 footer {
-  margin-top: 20px;
+  margin-top: 25px;
   font-size: 12px;
 }
 
-footer a:link {
-  color: #1e90ff; /* Unvisited link color */
+footer a {
+    color: #fff;
+}
+
+footer p + p {
+  font-size: 11px;
 }
 
 /******************************************
@@ -274,14 +278,17 @@ footer a:link {
     margin-right: 90px;
     margin-bottom: 10px;
   }
+
   h2 {
     font-size: 16px;
     margin-bottom: 20px;
     margin-top: 40px;
   }
+
   .main-button {
     font-size: 12px;
   }
+
   .search-placeholder {
     font-size: 14px;
     padding: 15px;
@@ -324,4 +331,10 @@ footer a:link {
     top: -5px;
     left: 108px;
   }
-}
+/* }
+
+@media all and (max-width: 480px) {
+  .flip-box-container {
+    width: 100%;
+  }
+} */
